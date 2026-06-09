@@ -62,7 +62,7 @@ function msg(req,type){const key=type==="success"?"success":"error";const v=req.
 function alerts(req){ return msg(req,"success")+msg(req,"error"); }
 function needLogin(req,res,next){ if(!req.session.user) return res.redirect("/login"); next(); }
 function needAdmin(req,res,next){ if(!req.session.user || req.session.user.role!=="Administrator") return res.status(403).send(page(req,"Access Denied",`<section class="auth"><h1>Access Denied</h1><p>Administrator access is required.</p><a class="btn primary" href="/dashboard">Back</a></section>`,"auth-page")); next(); }
-function logo(){ return `<span class="logo">PIS</span>`; }
+function logo() { return `<img src="/public/school-logo.png" alt="School Logo" class="school-logo" onerror="this.outerHTML=\'<span class=&quot;logo&quot;>PIS</span>\'">`; }
 function page(req,title,body,bodyClass=""){ return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} | PIS FMS</title><style>${INLINE_CSS}.v5badge{position:fixed;right:12px;bottom:12px;background:#0b2d5c;color:#fff;padding:8px 10px;border-radius:999px;font-size:12px;font-weight:700;z-index:9999;box-shadow:0 8px 20px rgba(0,0,0,.2)}</style></head><body class="${bodyClass}">${body}<div class="v5badge">V5 INLINE DESIGN</div></body></html>`; }
 
 function shell(req,title,content){
